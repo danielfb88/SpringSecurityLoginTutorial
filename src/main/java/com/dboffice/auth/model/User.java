@@ -1,4 +1,4 @@
-package com.example.model;
+package com.dboffice.auth.model;
 
 import java.util.Set;
 

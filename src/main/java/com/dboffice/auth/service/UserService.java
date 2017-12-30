@@ -1,6 +1,6 @@
-package com.example.service;
+package com.dboffice.auth.service;
 
-import com.example.model.User;
+import com.dboffice.auth.model.User;
 
 public interface UserService {
 	public User findUserByEmail(String email);

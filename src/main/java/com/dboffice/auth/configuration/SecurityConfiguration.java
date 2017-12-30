@@ -1,4 +1,4 @@
-package com.example.configuration;
+package com.dboffice.auth.configuration;
 
 import javax.sql.DataSource;
 
