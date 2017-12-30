@@ -1,6 +1,7 @@
 package com.dboffice.auth.service;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,10 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	private UserRepository userRepository;
+	
 	@Autowired
     private RoleRepository roleRepository;
+	
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
@@ -31,8 +34,11 @@ public class UserServiceImpl implements UserService{
 	public void saveUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
+        user.setCreatedDateTime(new Date());
+        
         Role userRole = roleRepository.findByRole("ADMIN");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        
 		userRepository.save(user);
 	}
 

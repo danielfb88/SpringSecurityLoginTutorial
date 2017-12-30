@@ -1,5 +1,6 @@
 package com.dboffice.auth.model;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -28,8 +31,8 @@ public class User {
 	private int id;
 
 	@Column(name = "email")
-	@Email(message = "*Please provide a valid Email")
-	@NotEmpty(message = "*Please provide an email")
+	@Email(message = "{messages.validate.field.email}")
+	@NotEmpty(message = "{messages.notnull.field.email}")
 	private String email;
 
 	@Column(name = "password")
@@ -39,6 +42,7 @@ public class User {
 	private String password;
 
 	@NotEmpty(message = "*Please confirm your password")
+	@Transient
 	private String passwordConfirmation;
 
 	@Column(name = "name")
@@ -51,6 +55,9 @@ public class User {
 
 	@Column(name = "active")
 	private int active;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdDateTime;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -118,6 +125,14 @@ public class User {
 
 	public void setPasswordConfirmation(String passwordConfirmation) {
 		this.passwordConfirmation = passwordConfirmation;
+	}
+
+	public Date getCreatedDateTime() {
+		return createdDateTime;
+	}
+
+	public void setCreatedDateTime(Date createdDateTime) {
+		this.createdDateTime = createdDateTime;
 	}
 
 }

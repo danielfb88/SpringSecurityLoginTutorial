@@ -20,6 +20,9 @@
 					th:object="${user}" method="post" class="form-horizontal"
 					role="form">
 					<h2>Registration Form</h2>
+					
+					<span th:text="#{label.exemplo}"></span>
+					
 					<div class="form-group">
 						<div class="col-sm-9">
 						<label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
