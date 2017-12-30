@@ -41,11 +41,19 @@ public class LoginController {
 	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		User userExists = userService.findUserByEmail(user.getEmail());
+		
 		if (userExists != null) {
 			bindingResult
 					.rejectValue("email", "error.user",
 							"There is already a user registered with the email provided");
 		}
+		
+		if (!user.getPassword().equals(user.getPasswordConfirmation())) {
+			bindingResult
+					.rejectValue("passwordConfirmation", "error.user",
+							"The password confirmation is different of password field");
+		}
+		
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("registration");
 		} else {
