@@ -31,8 +31,8 @@ public class User {
 	private int id;
 
 	@Column(name = "email")
-	@Email(message = "{messages.validate.field.email}")
-	@NotEmpty(message = "{messages.notnull.field.email}")
+	@Email(message = "*Please provide a valid Email")
+	@NotEmpty(message = "*Please provide an email")
 	private String email;
 
 	@Column(name = "password")
